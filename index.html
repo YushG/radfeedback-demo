@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RadFeedback</title>
+<meta name="description" content="RadFeedback turns the edits attendings make to residents' preliminary radiology reports into structured weekly feedback.">
+<style>
+:root{color-scheme:light;--page:#f2f4f8;--card:#ffffff;--ink:#0b1b3a;--ink-2:#3d4a63;--muted:#8089a0;--grid:#e3e5ec;--navy:#123a7a;--navy-wash:rgba(18,58,122,.08);--amber-wash:#fdf6e0;--amber-border:#f2e3ae;--t1:#3987e5;--t2:#1c5cab;--t3:#0d366b;--radius:12px;--radius-in:8px;--shadow:0 1px 2px rgba(11,27,58,.05),0 4px 14px rgba(11,27,58,.06)}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--page:#111110;--card:#1a1a19;--ink:#ffffff;--ink-2:#c3c2b7;--muted:#898781;--grid:#2c2c2a;--navy:#8fb4f2;--navy-wash:rgba(143,180,242,.10);--amber-wash:#2a2415;--amber-border:#4a3f1c;--t2:#86b6ef;--t3:#cde2fb;--shadow:none}}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--page)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--navy)}
+.topbar{background:var(--card);border-bottom:1px solid var(--grid);padding:12px 16px;display:flex;align-items:center;gap:10px}
+.logo{width:32px;height:32px;border-radius:var(--radius-in);background:var(--navy);display:grid;place-items:center;color:#fff;font-weight:600;font-size:14px}
+@media (prefers-color-scheme:dark){.logo{color:#0d0d0d}}
+.topbar h1{font-size:16px;font-weight:600;color:var(--navy)}
+.pill{margin-left:auto;border:1px solid var(--amber-border);background:var(--amber-wash);border-radius:999px;padding:4px 10px;font-size:12px;font-weight:600;white-space:nowrap}
+.wrap{max-width:760px;margin:0 auto;padding:28px 16px 48px}
+.lead{font-size:clamp(22px,4.5vw,30px);font-weight:600;line-height:1.2;letter-spacing:-.01em;margin:6px 0 10px}
+.sub{color:var(--ink-2);font-size:16px;max-width:60ch}
+.card{background:var(--card);border:1px solid var(--grid);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin-top:18px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:var(--radius-in);padding:12px 20px;font-weight:600;font-size:15px;text-decoration:none;border:1.5px solid var(--navy);color:var(--navy);background:transparent}
+.btn.primary{background:var(--navy);color:#fff}
+@media (prefers-color-scheme:dark){.btn.primary{color:#0d0d0d}}
+.note{font-size:13.5px;color:var(--muted);margin-top:10px}
+h2{font-size:16px;font-weight:600;margin-bottom:10px}
+ol,ul{padding-left:20px}
+li{margin:6px 0;color:var(--ink-2)}
+li b{color:var(--ink);font-weight:600}
+.tiers{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.tier{font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:999px;color:#fff}
+.t0{background:var(--grid);color:var(--ink-2)}.t1{background:var(--t1)}.t2{background:var(--t2)}.t3{background:var(--t3)}
+@media (prefers-color-scheme:dark){.t2,.t3{color:#0d0d0d}}
+.foot{margin-top:28px;font-size:12.5px;color:var(--muted);text-align:center;line-height:1.6}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="logo">Rx</div><h1>RadFeedback</h1><span class="pill">Demo · Not for clinical use</span></header>
+
+<main class="wrap">
+  <p class="lead">Formative feedback from the edits attendings already make.</p>
+  <p class="sub">Every preliminary report a resident writes is finalized by an attending. RadFeedback reads those edits, sorts them by how much they matter, and turns a rotation's worth into weekly feedback the resident can act on.</p>
+
+  <section class="card" aria-labelledby="d">
+    <h2 id="d">Try the demo</h2>
+    <p class="sub" style="font-size:15px">The demo opens with a finished analysis of a synthetic rotation: five residents, 120 report pairs, fictional names. Nothing is sent anywhere; it runs entirely in your browser.</p>
+    <div class="actions">
+      <a class="btn primary" href="radfeedback-demo.html">Open the demo</a>
+    </div>
+    <p class="note">Best on a laptop. It opens on <b>Resident View</b>: tap a resident ID to see their weekly feedback, choose <b>Program Dashboard</b> for the rotation overview, or <b>Assess Feedback</b> for the pairs set aside for a radiologist's review, each with the reason it is there.</p>
+  </section>
+
+  <section class="card" aria-labelledby="h">
+    <h2 id="h">How it works</h2>
+    <ol>
+      <li><b>Pair.</b> The program exports its preliminary and final reports. Identical pairs and trivial edits are set aside before anything is sent for grading.</li>
+      <li><b>Grade.</b> Each remaining edit is classified on a four-tier scale, with the model allowed to decline when an edit is ambiguous. Pairs it cannot compare, or declines, are listed for a radiologist rather than counted.</li>
+      <li><b>Report.</b> Counts are aggregated in code; a short narrative per resident and per week cites the actual edited sentences, so every point can be checked against the source.</li>
+    </ol>
+    <div class="tiers" aria-label="The four tiers">
+      <span class="tier t0">Tier 0 · noise</span><span class="tier t1">Tier 1 · style</span><span class="tier t2">Tier 2 · content</span><span class="tier t3">Tier 3 · management</span>
+    </div>
+  </section>
+
+  <p class="foot">The demo runs on synthetic reports. Resident and attending identities are fictional.<br>Not for clinical use · RadFeedback v3.8.0</p>
+</main>
+
+</body>
+</html>

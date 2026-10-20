@@ -1,0 +1,14 @@
+name: Recover stuck Pages deployment
+on:
+  workflow_dispatch:
+permissions:
+  pages: write
+jobs:
+  cancel-stuck-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel original stuck Pages deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh api --method POST "repos/$GH_REPO/pages/deployments/55024e7fd0f50faa9670b0db7e53ae3e6e4533d4/cancel"
